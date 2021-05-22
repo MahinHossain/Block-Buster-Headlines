@@ -1,23 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import { useState, useEffect, useRef } from "react";
+import Headers from "./Headers";
+import { newscatagory } from "./Newscatagory";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className=" app container">
+      <div class="row">
+        <div className="col-6">
+          <Headers newscatagory={newscatagory.business} />
+        </div>
+      </div>
     </div>
   );
 }
