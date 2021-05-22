@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { newscatagory } from "./Newscatagory";
 export default function Headers(props) {
   const [search, setsearch] = useState("");
-  console.log(`props`, props.newscatagory);
   const onkeypressf = () => {};
   return (
     <div>
@@ -13,8 +12,7 @@ export default function Headers(props) {
           type="search"
           class="form-control"
           name="search"
-          aria-describedby="helpId"
-          placeholder="search"
+          placeholder="Type for blockbuster headlines"
           value={search}
           onChange={(e) => setsearch(e.target.value)}
           onKeyPress={onkeypressf}
