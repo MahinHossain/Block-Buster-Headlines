@@ -12,7 +12,7 @@ export default function Headers(props) {
           type="search"
           class="form-control"
           name="search"
-          placeholder="Type for blockbuster headlines"
+          placeholder="Type & Search for blockbuster headlines"
           value={search}
           onChange={(e) => setsearch(e.target.value)}
           onKeyPress={onkeypressf}
@@ -20,13 +20,19 @@ export default function Headers(props) {
 
         {newscatagory &&
           Object.keys(newscatagory).map((item) => {
-            if (props.newscatagory == newscatagory[item]) {
+            if (props.newscatagory === newscatagory[item]) {
               return (
-                <button className=" btn btn-sm btn-warning inline mr-3 mt-2">{`#${newscatagory[item]}`}</button>
+                <button
+                  className=" btn btn-sm btn-warning inline mr-3 mt-2"
+                  onClick={() => props.setcat(newscatagory[item])}
+                >{`#${newscatagory[item]}`}</button>
               );
             }
             return (
-              <button className=" btn btn-sm btn-light inline mr-3 mt-2">{`#${newscatagory[item]}`}</button>
+              <button
+                className=" btn btn-sm btn-light inline mr-3 mt-2"
+                onClick={() => props.setcat(newscatagory[item])}
+              >{`#${newscatagory[item]}`}</button>
             );
           })}
       </div>

@@ -2,27 +2,24 @@ import React from "react";
 
 const Newsitem = ({ item }) => (
   <div className="card  w-100 h-50 mt-3">
-    {/* <div>
-      <img className="card-img-top " src={item.img} alt={item.title} />
-      <div className="card-body">
-        <h6 className="card-title"> {item.title}</h6>
-        <small> deats</small>
-      </div>
-    </div>
-*/}
     <div class="card">
-      <img class="card-img-top" src={item.img} alt="Card image" />
+      <img class="card-img-top" src={item.urlToImage} alt="Card image" />
       <div class="card-body">
-        <h4 class="card-title">John Doe</h4>
-        <p class="card-text">Some example text.</p>
+        <strong class="card-title ">Author:{item.author}</strong>
+        <h4 class="card-title">Title:{item.title}</h4>
+        <p class="card-text">Description:{item.description}</p>
+        <small class="card-text mr-auto mt-4">
+          Publish Date:{item.publishedAt}
+        </small>
         <a href="#" class="btn btn-secondary float-right">
-          Source
+          {item.source.name}
         </a>
       </div>
     </div>
   </div>
 );
 function NewsList({ news }) {
+  console.log(`news`, news);
   return (
     <div>
       {news && news.length == 0 && (
