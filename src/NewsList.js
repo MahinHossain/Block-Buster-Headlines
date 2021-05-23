@@ -19,7 +19,6 @@ const Newsitem = ({ item }) => (
   </div>
 );
 function NewsList({ news }) {
-  console.log(`news`, news);
   return (
     <div>
       {news && news.length == 0 && (

@@ -4,4 +4,6 @@ export const newscatagory = {
   business: "business",
   general: "general",
   sports: "sports",
+  health: "health",
+  entertainment: "entertainment",
 };
