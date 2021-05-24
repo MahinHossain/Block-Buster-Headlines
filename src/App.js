@@ -2,8 +2,6 @@ import "./App.css";
 import Headers from "./Headers";
 import NewsList from "./NewsList";
 import Pagination from "./Pagination";
-import { newscatagory } from "./Newscatagory";
-import { newsData } from "./NewsData";
 import Loading from "./Loading";
 import axios from "axios";
 import { useState, useEffect } from "react";
@@ -11,24 +9,48 @@ import { useState, useEffect } from "react";
 function App() {
   const [data, setdata] = useState([]);
   const [category, setcategory] = useState("technology");
+  const [search, setseach] = useState("");
+  const [isloading, setisloading] = useState(false);
+  /////
+  const [Currentpage, setCurrentpage] = useState(1);
+  const [postsPerPage, setpostsPerPage] = useState(2);
 
   useEffect(() => {
-    const url = `  https://newsapi.org/v2/top-headlines?category=${category}&apiKey=5246413deef946ceb84dffb2176df416`;
-    axios.get(url).then((res) => setdata(res.data.articles));
+    const fetchData = async () => {
+      const url = `  ${process.env.REACT_APP_NEWS_URL}?category=${category}&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`;
+      setisloading(true);
+
+      await axios.get(url).then((res) => setdata(res.data.articles));
+      setisloading(false);
+    };
+
+    fetchData();
   }, [category]);
 
   const changectegory = (cat) => {
     setcategory(cat);
   };
 
-  // const url = `${process.env.REACT_APP_NEWS_URL}?country=de&category=business&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`;
-  console.log(`process.`, process.env.REACT_APP_NEWS_URL);
+  //for pagination
+  const indexofLastpost = Currentpage * postsPerPage;
+  const indexofFirstpost = indexofLastpost - postsPerPage;
+  const currentpost = data.slice(indexofFirstpost, indexofLastpost);
+  const paginate = (number) => {
+    setCurrentpage(number);
+  };
+  const querySerach = (value) => {
+    setseach(value);
+  };
+  console.log(`search`, search);
   return (
-    <div className=" app container p-5">
-      <div class="row">
+    <div className=" app container p-5 m-5">
+      <div class="col">
         <div className="col-sm-6 offset-md-3 ">
-          <Headers newscatagory={category} setcat={changectegory} />
-
+          <Headers
+            newscatagory={category}
+            setcat={changectegory}
+            querySerach={querySerach}
+          />
           <div className="d-flex">
             <small className="text-black-50 text-dark">
               About {0} result found
@@ -37,13 +59,20 @@ function App() {
               page {1} of {110}
             </small>
           </div>
-          <NewsList news={data} />
-          <Pagination />
-          <Loading />
+          {isloading ? (
+            <Loading />
+          ) : (
+            <NewsList news={currentpost} isloading={isloading} />
+          )}
+
+          <Pagination
+            postsPerPage={postsPerPage}
+            totalPost={data.length}
+            paginate={paginate}
+          />
         </div>
       </div>
     </div>
   );
 }
-
 export default App;

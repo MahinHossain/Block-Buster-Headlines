@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { newscatagory } from "./Newscatagory";
 export default function Headers(props) {
   const [search, setsearch] = useState("");
-  const onkeypressf = () => {};
+  const onkeypressf = (e) => {
+    if (e.key == "Enter") {
+      props.querySerach(search);
+    }
+  };
   return (
     <div>
       <div class="form-group">
@@ -13,9 +17,8 @@ export default function Headers(props) {
           class="form-control"
           name="search"
           placeholder="Type & Search for blockbuster headlines"
-          value={search}
           onChange={(e) => setsearch(e.target.value)}
-          onKeyPress={onkeypressf}
+          onKeyPress={(e) => onkeypressf(e)}
         />
 
         {newscatagory &&
