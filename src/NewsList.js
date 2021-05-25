@@ -1,8 +1,8 @@
 import React from "react";
 
 const Newsitem = ({ item }) => (
-  <div className="card  w-100 h-50 mt-3 ">
-    <div class="card">
+  <div className=" mt-4 ">
+    <div class="card  border border-dark ">
       <img class="card-img-top" src={item.urlToImage} alt="Card image" />
       <div class="card-body">
         <strong class="card-title ">Author:{item.author}</strong>

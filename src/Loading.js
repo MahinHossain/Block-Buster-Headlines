@@ -1,4 +1,4 @@
-const Loading = ({ isloading }) => {
+const Loading = () => {
   return (
     <div className="d-flex align-items-center">
       <h4 className="text-danger">Loading......</h4>

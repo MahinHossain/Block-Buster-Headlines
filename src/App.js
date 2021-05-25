@@ -24,7 +24,7 @@ function App() {
       await axios.get(url).then((res) => setdata(res.data.articles));
       setisloading(false);
     };
-
+    console.log(`calll`);
     fetchData();
   }, [category, search]);
 
@@ -44,7 +44,7 @@ function App() {
     console.log(`value`, value);
   };
   return (
-    <div className=" app row container p-5 m-5">
+    <div className=" app row container ">
       <div className="col-sm-6 offset-md-4 ">
         <Headers
           newscatagory={category}
