@@ -1,7 +1,7 @@
 import React from "react";
 
 const Newsitem = ({ item }) => (
-  <div className="card  w-100 h-50 mt-3">
+  <div className="card  w-100 h-50 mt-3 ">
     <div class="card">
       <img class="card-img-top" src={item.urlToImage} alt="Card image" />
       <div class="card-body">
@@ -20,9 +20,9 @@ const Newsitem = ({ item }) => (
 );
 function NewsList({ news }) {
   return (
-    <div className="row">
+    <div className="">
       {news && news.length == 0 && (
-        <h3 className="tex-danger">There is no Data</h3>
+        <h3 className="text-danger">There is no Data</h3>
       )}
       {news && news.map((item) => <Newsitem item={item} key={item.img} />)}{" "}
     </div>

@@ -13,21 +13,20 @@ function App() {
   const [isloading, setisloading] = useState(false);
   /////
   const [Currentpage, setCurrentpage] = useState(1);
-  const [postsPerPage, setpostsPerPage] = useState(2);
+  const [postsPerPage, setpostsPerPage] = useState(30);
 
   useEffect(() => {
     const fetchData = async () => {
-      // const url = `  ${process.env.REACT_APP_NEWS_URL}?q=${search}&category=${category}&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`;
-      const url = `  ${process.env.REACT_APP_NEWS_URL}?category=${category}&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`;
+      const url = `  ${process.env.REACT_APP_NEWS_URL}?q=${search}&category=${category}&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`;
+
       setisloading(true);
-      console.log(`url`, url);
 
       await axios.get(url).then((res) => setdata(res.data.articles));
       setisloading(false);
     };
 
     fetchData();
-  }, [category]);
+  }, [category, search]);
 
   const changectegory = (cat) => {
     setcategory(cat);
@@ -42,10 +41,11 @@ function App() {
   };
   const querySerach = (value) => {
     setseach(value);
+    console.log(`value`, value);
   };
   return (
     <div className=" app row container p-5 m-5">
-      <div className="col-sm-6 offset-md-3 ">
+      <div className="col-sm-6 offset-md-4 ">
         <Headers
           newscatagory={category}
           setcat={changectegory}
