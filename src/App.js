@@ -17,8 +17,10 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
+      // const url = `  ${process.env.REACT_APP_NEWS_URL}?q=${search}&category=${category}&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`;
       const url = `  ${process.env.REACT_APP_NEWS_URL}?category=${category}&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`;
       setisloading(true);
+      console.log(`url`, url);
 
       await axios.get(url).then((res) => setdata(res.data.articles));
       setisloading(false);
@@ -41,36 +43,33 @@ function App() {
   const querySerach = (value) => {
     setseach(value);
   };
-  console.log(`search`, search);
   return (
-    <div className=" app container p-5 m-5">
-      <div class="col">
-        <div className="col-sm-6 offset-md-3 ">
-          <Headers
-            newscatagory={category}
-            setcat={changectegory}
-            querySerach={querySerach}
-          />
-          <div className="d-flex">
-            <small className="text-black-50 text-dark">
-              About {0} result found
-            </small>
-            <small className="text-black-50 ml-auto">
-              page {1} of {110}
-            </small>
-          </div>
-          {isloading ? (
-            <Loading />
-          ) : (
-            <NewsList news={currentpost} isloading={isloading} />
-          )}
-
-          <Pagination
-            postsPerPage={postsPerPage}
-            totalPost={data.length}
-            paginate={paginate}
-          />
+    <div className=" app row container p-5 m-5">
+      <div className="col-sm-6 offset-md-3 ">
+        <Headers
+          newscatagory={category}
+          setcat={changectegory}
+          querySerach={querySerach}
+        />
+        <div className="d-flex">
+          <small className="text-black-50 text-dark">
+            About {0} result found
+          </small>
+          <small className="text-black-50 ml-auto">
+            page {1} of {110}
+          </small>
         </div>
+        {isloading ? (
+          <Loading />
+        ) : (
+          <NewsList news={currentpost} isloading={isloading} />
+        )}
+
+        <Pagination
+          postsPerPage={postsPerPage}
+          totalPost={data.length}
+          paginate={paginate}
+        />
       </div>
     </div>
   );
