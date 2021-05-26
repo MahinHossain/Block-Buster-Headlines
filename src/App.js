@@ -13,12 +13,12 @@ function App() {
   const [isloading, setisloading] = useState(false);
   /////
   const [Currentpage, setCurrentpage] = useState(1);
-  const [postsPerPage, setpostsPerPage] = useState(30);
+  const [postsPerPage, setpostsPerPage] = useState(5);
 
   useEffect(() => {
     const fetchData = async () => {
       const url = `  ${process.env.REACT_APP_NEWS_URL}?q=${search}&category=${category}&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`;
-
+      console.log(`url`, url);
       setisloading(true);
 
       await axios.get(url).then((res) => setdata(res.data.articles));
